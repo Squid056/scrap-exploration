@@ -117,8 +117,22 @@ local function add_result(recipe, new_result)
     end
 end
 
+local function add_ingredient(recipe, new_ingredient)
+    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
+
+    for _, difficulty in pairs(difficulties) do
+        local recipe = difficulty
+        
+        table.insert(recipe.ingredients, new_ingredient)
+    end
+end
+
 local function redefine_ingredients_table(recipe, new_ingredients)
-    data.raw.recipe[recipe].ingredients = new_ingredients
+    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
+    
+    for _, diffculty in pairs(difficulties) do
+        diffculty.ingredients = new_ingredients       
+    end
 end
 
 redefine_results_table("se-broken-data-scrapping", {
@@ -217,4 +231,59 @@ add_result("se-space-mirror-alternate",
 
 add_result("nuclear-fuel-reprocessing",
     {type = "item", name = "radiation-scrap", amount_min = 1, amount_max = 2}
+)
+
+
+-- material science changes (minor)
+redefine_results_table("se-impact-shielding-data", {
+    {type = "item", name = "se-impact-shielding-data", amount = 25},
+    {type = "item", name = "se-heavy-girder", probability = 0.5, amount = 1},
+    {type = "item", name = "se-iridium-plate", probability = 0.25, amount = 1},
+    {type = "item", name = "compressed-scrap", amount = 70},
+    {type = "item", name = "raw-scrap", amount = 500},
+    {type = "fluid", name = "se-contaminated-space-water", amount = 1},
+})
+
+add_result("se-experimental-alloys-data",
+    {type = "item", name = "compressed-scrap", probability = 0.05, amount = 1}
+)
+
+add_result("se-material-testing-pack",
+    {type = "item", name = "se-scrap", probability = 0.05, amount_min = 1, amount_max = 2}
+)
+
+-- energy science changes (minor)
+
+add_result("se-radiation-data",
+    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+)
+
+add_result("se-quantum-phenomenon-data",
+    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+)
+
+
+redefine_ingredients_table("se-conductivity-data", {
+    {type = "item", name = "electronic-circuit", amount = 2},
+    {type = "item", name = "copper-cable", amount = 12},
+    {type = "item", name = "se-holmium-plate", amount = 1},
+    {type = "item", name = "se-empty-data", amount = 1},
+    {type = "fluid", name = "se-space-coolant-cold", amount = 10},
+})
+
+add_result("se-conductivity-data",
+    {type = "item", name = "copper-cable", probability = 0.5, amount = 6}
+)
+
+-- gamma ray detector changes (minor, so it can fit in with the other mirror changes)
+
+add_ingredient("se-gammaray-detector",
+    {type = "item", name = "se-aeroframe-pole", amount = 6}
+)
+
+add_result("se-gammaray-detector",
+    {type = "item", name = "se-aeroframe-pole", probability = 0.98, amount = 6}
+)
+add_result("se-gammaray-detector",
+    {type = "item", name = "se-scrap", probability = 0.02, amount = 12}
 )

@@ -209,7 +209,7 @@ data:extend({
 data_util.tech_lock_recipes("se-recycling-facility", "scrap-to-raw-scrap")
 data_util.tech_lock_recipes("se-space-decontamination-facility", "scrap-decontamination-ground")
 data_util.tech_lock_recipes("se-space-mechanical-laboratory", "scrap-compression")
-
+data_util.tech_lock_recipes("se-space-mechanical-laboratory", "scrap-decompression")
 
 local function raw_scrap_smelting(name, count, probability, outcount)
     data:extend({
