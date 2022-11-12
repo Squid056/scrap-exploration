@@ -98,5 +98,24 @@ data:extend({
             {type = "item", name = "logistic-robot", probability = 0.82, amount = 1},
             {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
         }
-    }
+    },
+--[[    {
+        type = "recipe",
+        name = "experimental-fish-growth",
+        order = "",
+        energy_required = 30,
+        enabled = false,
+        category = "space-growth",
+        subgroup = "specimen",
+        icons = data_util.sub_icons(data.raw.item["raw-fish"].icon, data.raw.item["se-experimental-bioculture"].icon),
+        ingredients = {
+            {name = "se-experimental-bioculture", amount = 10},
+            {type = "fluid", name = "se-nutrient-gel", amount = 100}
+        },
+        results = {
+            {type = "item", name = "raw-fish", amount_min = 1, amount_max = 10},
+            {type = "fluid", name = "se-contaminated-bio-sludge", amount = 50},
+            {type = "fluid", name = "se-contaminated-space-water", amount = 50}
+        }
+    },]]
 })

@@ -313,4 +313,56 @@ add_result("se-radiation-exposure-data",
 add_result("se-radiation-exposure-resistance-data",
     {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )
+
+add_result("se-bioelectrics-data",
+{type = "item", name = "se-contaminated-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+)
+
+add_result("se-experimental-genetic-data",
+{type = "item", name = "se-contaminated-scrap", probability = 0.1, amount = 1}
+)
+
+
+--#endregion
+
+--#region DSS changes (WIP)
+
+redefine_ingredients_table("se-naquium-ingot-to-plate", {
+    {type = "item", name = "se-naquium-ingot", amount = 1},
+    {type = "item", name = "tank", amount = 1},
+    {type = "item", name = "explosive-uranium-cannon-shell", amount = 1},
+    {type = "item", name = "se-heavy-girder", amount = 10},
+})
+redefine_results_table("se-naquium-ingot-to-plate", {
+    {type = "item", name = "se-naquium-plate", amount = 10},
+    {type = "item", name = "tank", amount = 1},
+    {type = "item", name = "se-heavy-girder", amount = 9},
+    {type = "item", name = "radiation-scrap", probability = 0.5, amount_min = 1, amount_max = 5}
+
+})
+
+--#endregion
+
+--#region Matter fusion changes (mostly just scrap swaps)
+
+data_util.replace_or_add_result("se-matter-fusion-dirty", "se-contaminated-scrap", "radiation-scrap", 15)
+
+data_util.replace_or_add_result("se-matter-fusion-iron", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-copper", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-stone", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-uranium", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-vulcanite", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-cryonite", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-berylium", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "radiation-scrap", 1)
+
+data_util.replace_or_add_result("se-matter-fusion-iridium", "se-contaminated-scrap", "radiation-scrap", 1)
+
 --#endregion

@@ -205,7 +205,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "radiation-scrap-cleaning",
+        name = "radiation-scrap-cleaning-slow",
         --order = ""
         energy_required = 120,
         enabled = false,
@@ -234,12 +234,45 @@ data:extend({
             {type = "item", name = "uranium-235", probability = 0.01, amount = 1},
         }
     },
+    {
+        type = "recipe",
+        name = "radiation-scrap-cleaning-fast",
+        --order = ""
+        energy_required = 10,
+        enabled = false,
+        category = "space-decontamination",
+        icons = data_util.transition_icons(
+        {
+            icon = data.raw.item["radiation-scrap"].icon,
+            icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
+        },
+        {
+            icon = data.raw.item["se-contaminated-scrap"].icon,
+            icon_size = data.raw.item["se-contaminated-scrap"].icon_size, scale = 0.5
+        }),
+        subgroup = "recycling",
+        ingredients = {
+            {type = "item", name = "radiation-scrap", amount = 10},
+            {type = "fluid", name = "se-chemical-gel", amount = 100},
+            {type = "fluid", name = "se-vitalic-acid", amount = 32},
+
+        },
+        results = {
+            {type = "item", name = "se-contaminated-scrap", amount = 10},
+            {type = "fluid", name = "se-contaminated-space-water", amount = 100},
+            {type = "fluid", name = "se-methane-gas", amount = 10},
+            {type = "item", name = "uranium-238", probability = 0.1, amount = 1},
+            {type = "item", name = "uranium-235", probability = 0.01, amount = 1},
+            {type = "item", name = "uranium-ore", probability = 0.25, amount = 1},
+        }
+    },
 })
 -- lock recipes to x 
 data_util.tech_lock_recipes("se-recycling-facility", "scrap-to-raw-scrap")
 data_util.tech_lock_recipes("se-space-decontamination-facility", "scrap-decontamination-ground")
 data_util.tech_lock_recipes("se-space-mechanical-laboratory", "scrap-compression")
 data_util.tech_lock_recipes("se-space-mechanical-laboratory", "scrap-decompression")
+data_util.tech_lock_recipes("se-space-decontamination-facility", "radiation-scrap-cleaning-slow")
 
 local function raw_scrap_smelting(name, count, probability, outcount)
     data:extend({
