@@ -214,3 +214,7 @@ add_result("se-space-mirror",
 add_result("se-space-mirror-alternate", 
     {type = "item", name = "iron-stick", amount = 12}
 )
+
+add_result("nuclear-fuel-reprocessing",
+    {type = "item", name = "radiation-scrap", amount_min = 1, amount_max = 2}
+)
