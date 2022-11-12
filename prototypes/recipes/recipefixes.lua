@@ -242,7 +242,7 @@ redefine_results_table("se-ballistic-shielding-data", {
 data.raw.recipe["se-ballistic-shielding-data"].energy_required = 50
 
 --#endregion
---#region energy science changes (minor)
+--#region energy science changes (minor-ish)
 
 add_result("se-radiation-data",
     {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
@@ -252,6 +252,21 @@ add_result("se-quantum-phenomenon-data",
     {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )
 
+redefine_ingredients_table("se-quantum-phenomenon-data", {
+    {type = "item", name = "se-empty-data", amount = 3},
+    {type = "fluid", name = "se-space-coolant-cold", amount = 25},
+    {type = "item", name = "construction-robot", amount = 1},
+})
+redefine_results_table("se-quantum-phenomenon-data", {
+    {type = "item", name = "se-quantum-phenomenon-data", probability = 0.85, amount = 3},
+    {type = "item", name = "se-junk-data", probability = 0.10, amount = 1},
+    {type = "fluid", name = "se-space-coolant-hot", amount = 25},
+    {type = "item", name = "construction-robot", probability = 0.82, amount = 1},
+    {type = "item", name = "logistic-robot", probability = 0.15, amount = 1},
+    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+})
+data.raw.recipe["se-quantum-phenomenon-data"].energy_required = 20
+data_util.tech_lock_recipes("se-space-catalogue-energy-2", "se-quantum-phenomenon-data-alternate")
 
 redefine_ingredients_table("se-conductivity-data", {
     {type = "item", name = "electronic-circuit", amount = 2},
