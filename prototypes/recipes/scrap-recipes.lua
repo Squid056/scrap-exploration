@@ -204,6 +204,37 @@ data:extend({
         {type = "item", name = "raw-scrap",probability = 0.10, amount = 10},
         }
     },
+    {
+        type = "recipe",
+        name = "radiation-scrap-cleaning",
+        --order = ""
+        energy_required = 120,
+        enabled = true,
+        category = "space-decontamination",
+        icons = data_util.transition_icons(
+        {
+            icon = data.raw.item["radiation-scrap"].icon,
+            icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
+        },
+        {
+            icon = data.raw.item["se-contaminated-scrap"].icon,
+            icon_size = data.raw.item["se-contaminated-scrap"].icon_size, scale = 0.5
+        }),
+        subgroup = "recycling",
+        ingredients = {
+            {type = "item", name = "radiation-scrap", amount = 10},
+            {type = "fluid", name = "se-space-water", amount = 1000},
+
+        },
+        results = {
+            {type = "item", name = "se-contaminated-scrap", amount = 10},
+            {type = "fluid", name = "se-contaminated-space-water", amount = 990},
+            {type = "fluid", name = "se-contaminated-bio-sludge", amount = 10},
+            {type = "item", name = "sand", amount_min = 1, amount_max = 10},
+            {type = "item", name = "uranium-238", probability = 0.1, amount_min = 1, amount_max = 5},
+            {type = "item", name = "uranium-235", probability = 0.01, amount = 1},
+        }
+    },
 })
 -- lock recipes to x 
 data_util.tech_lock_recipes("se-recycling-facility", "scrap-to-raw-scrap")

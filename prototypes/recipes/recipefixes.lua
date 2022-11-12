@@ -252,6 +252,11 @@ add_result("se-material-testing-pack",
     {type = "item", name = "se-scrap", probability = 0.05, amount_min = 1, amount_max = 2}
 )
 
+add_result("se-radiation-shielding-data",
+    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+)
+
+
 -- energy science changes (minor)
 
 add_result("se-radiation-data",
@@ -286,4 +291,14 @@ add_result("se-gammaray-detector",
 )
 add_result("se-gammaray-detector",
     {type = "item", name = "se-scrap", probability = 0.02, amount = 12}
+)
+
+-- bio changes (minor)
+
+add_result("se-radiation-exposure-data",
+    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+)
+
+add_result("se-radiation-exposure-resistance-data",
+    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )

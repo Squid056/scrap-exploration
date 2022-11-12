@@ -29,7 +29,7 @@ data:extend({
         order = "b[recycling]-a",
         energy_required = 1,
         enabled = true, -- lock behind technology later.
-        category = "scrap-smelting",
+        category = "smelting",
         subgroup = "recycling",
         icons = data_util.transition_icons(
             {
@@ -54,7 +54,7 @@ data:extend({
         order = "b[recycling]-b",
         energy_required = 1,
         enabled = true, -- lock behind technology later.
-        category = "scrap-smelting",
+        category = "smelting",
         subgroup = "recycling",
         icons = data_util.transition_icons(
             {
