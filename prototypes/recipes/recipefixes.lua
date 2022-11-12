@@ -14,53 +14,6 @@ data.raw.item["se-contaminated-scrap"].order = "z-03"
 
 -- RECIPE EDITS
 
---[[
-local function insert_result(difficulty, recipe, name, amount, isfluid, probability, amount_min, amount_max)
-    local wait = true
-    local recipe = data.raw.recipe[recipe]
-    local addon_result = nil
-    if isfluid == true then
-        addon_result = {type = "fluid", name = name, amount = amount}
-        wait = false
-    else 
-        if amount then
-            addon_result = {type = "item", name = name, amount = amount}
-            wait = false
-        else
-            addon_result = {type = "item", name = name, probability = probability, amount_min = amount_min, amount_max = amount_max}
-            wait = false
-        end
-    end
-
-    if wait == false then
-        if difficulty == nil then
-            local resultdiff = {recipe, recipe.normal or nil, recipe.expensive or nil}
-            local current_result =  nil
-            for _, diff in pairs(resultdiff) do
-                current_result = recipe[diff]
-                recipe[diff] = nil
-                difficulty = 
-                {
-                    current_result,
-                    addon_result
-                }
-            end
-
-        else
-            table.insert(recipe[difficulty], addon_result)
-        end
-    end
-end
-
-local function insert_result_full(recipe_to_edit, name, amount, isfluid, probability, amount_min, amount_max)
-    local difficulties = {recipe, recipe.normal or nil, recipe.expensive or nil}
-    
-    for _, difficulty in pairs(difficulties) do
-        insert_result(difficulty, recipe_to_edit, name, amount, isfluid, probability, amount_min, amount_max)
-    end
-end
-]]
-
 local function redefine_results_table_sub(recipe, new_results, difficulty)
     if difficulty == recipe then
         if data.raw.recipe[recipe].results ~= nil then
@@ -134,6 +87,17 @@ local function redefine_ingredients_table(recipe, new_ingredients)
         diffculty.ingredients = new_ingredients       
     end
 end
+
+local function remove_result(recipe, to_remove, replace_with)   
+    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
+
+    for _, difficulty in pairs(difficulties) do
+        for i, value in pairs(t) do
+            
+        end
+    end
+end
+
 
 redefine_results_table("se-broken-data-scrapping", {
     {type = "item", name = "se-scrap", probability = 0.9, amount = 5},
@@ -222,19 +186,13 @@ redefine_results_table("se-used-lifesupport-canister-cleaning", {
     {type = "item", name = "se-contaminated-scrap", probability = 0.8, amount_min = 1, amount_max = 5},
 })
 
-add_result("se-space-mirror", 
-    {type = "item", name = "iron-stick", amount = 12}
-)
-add_result("se-space-mirror-alternate", 
-    {type = "item", name = "iron-stick", amount = 12}
-)
 
 add_result("nuclear-fuel-reprocessing",
     {type = "item", name = "radiation-scrap", amount_min = 1, amount_max = 2}
 )
 
 
--- material science changes (minor)
+--#region material science changes
 redefine_results_table("se-impact-shielding-data", {
     {type = "item", name = "se-impact-shielding-data", amount = 25},
     {type = "item", name = "se-heavy-girder", probability = 0.5, amount = 1},
@@ -252,12 +210,39 @@ add_result("se-material-testing-pack",
     {type = "item", name = "se-scrap", probability = 0.05, amount_min = 1, amount_max = 2}
 )
 
-add_result("se-radiation-shielding-data",
-    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+data_util.replace_or_add_result("se-radiation-shielding-data", "se-contaminated-scrap", "radiation-scrap", 8)
+
+data_util.replace_or_add_result("se-pressure-containment-data", "se-scrap", "compressed-scrap", 2)
+add_result("se-pressure-containment-data",
+    {type = "item", name = "se-scrap", amount = 10}
 )
 
+data_util.replace_or_add_result("se-rigidity-data", "se-scrap", "compressed-scrap", nil, false, 1, 1, 0.5)
 
--- energy science changes (minor)
+data_util.replace_or_add_result("se-explosion-shielding-data", "se-scrap", "compressed-scrap", nil, false, 1, 1, 0.50)
+
+-- ballistic data rework
+redefine_ingredients_table("se-ballistic-shielding-data", {
+    {type = "item", name = "se-empty-data", amount = 5},
+    {type = "item", name = "se-material-testing-pack", amount = 5},
+    {type = "item", name = "se-heavy-girder", amount = 2},
+    {type = "item", name = "se-iridium-plate", amount = 2},
+    {type = "item", name = "cannon-shell", amount = 4},
+    --{type = "fluid", name = "lubricant", amount = 5},
+    {type = "item", name = "concrete-wall", amount = 1},
+})
+redefine_results_table("se-ballistic-shielding-data", {
+    {type = "item", name = "se-ballistic-shielding-data", amount = 5},
+    {type = "item", name = "se-heavy-girder", probability = 0.75, amount = 2},
+    {type = "item", name = "se-iridium-plate", probability = 0.25, amount = 2},
+    --{type = "fluid", name = "se-contaminated-space-water", amount = 1},
+    {type = "item", name = "concrete-wall", probability = 0.9, amount = 1},
+    {type = "item", name = "compressed-scrap", amount = 2},
+})
+data.raw.recipe["se-ballistic-shielding-data"].energy_required = 50
+
+--#endregion
+--#region energy science changes (minor)
 
 add_result("se-radiation-data",
     {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
@@ -280,7 +265,9 @@ add_result("se-conductivity-data",
     {type = "item", name = "copper-cable", probability = 0.5, amount = 6}
 )
 
--- gamma ray detector changes (minor, so it can fit in with the other mirror changes)
+--#endregion
+
+--#region gamma ray detector changes & space mirror changes
 
 add_ingredient("se-gammaray-detector",
     {type = "item", name = "se-aeroframe-pole", amount = 6}
@@ -293,7 +280,16 @@ add_result("se-gammaray-detector",
     {type = "item", name = "se-scrap", probability = 0.02, amount = 12}
 )
 
--- bio changes (minor)
+add_result("se-space-mirror", 
+    {type = "item", name = "iron-stick", amount = 12}
+)
+add_result("se-space-mirror-alternate", 
+    {type = "item", name = "iron-stick", amount = 12}
+)
+
+--#endregion
+
+--#region bio changes (minor)
 
 add_result("se-radiation-exposure-data",
     {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
@@ -302,3 +298,4 @@ add_result("se-radiation-exposure-data",
 add_result("se-radiation-exposure-resistance-data",
     {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )
+--#endregion

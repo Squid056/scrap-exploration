@@ -176,7 +176,6 @@ data:extend({
         },
         results = {
         {type = "item", name = "compressed-scrap", amount = 1},
-        {type = "item", name = "raw-scrap",probability = 0.10, amount = 10},
         }
     },
     {
@@ -200,7 +199,7 @@ data:extend({
             {type = "item", name = "compressed-scrap", amount = 20},
         },
         results = {
-        {type = "item", name = "se-scrap", amount = 20},
+        {type = "item", name = "se-scrap", probability = 0.96, amount = 20},
         {type = "item", name = "raw-scrap",probability = 0.10, amount = 10},
         }
     },
@@ -209,7 +208,7 @@ data:extend({
         name = "radiation-scrap-cleaning",
         --order = ""
         energy_required = 120,
-        enabled = true,
+        enabled = false,
         category = "space-decontamination",
         icons = data_util.transition_icons(
         {
@@ -231,7 +230,7 @@ data:extend({
             {type = "fluid", name = "se-contaminated-space-water", amount = 990},
             {type = "fluid", name = "se-contaminated-bio-sludge", amount = 10},
             {type = "item", name = "sand", amount_min = 1, amount_max = 10},
-            {type = "item", name = "uranium-238", probability = 0.1, amount_min = 1, amount_max = 5},
+            {type = "item", name = "uranium-238", probability = 0.1, amount = 1},
             {type = "item", name = "uranium-235", probability = 0.01, amount = 1},
         }
     },
@@ -250,7 +249,7 @@ local function raw_scrap_smelting(name, count, probability, outcount)
         energy_required = 5,
         category = "scrap-smelting",
         order = "a[recycling]-a" .. name,
-        enabled = true, -- change later
+        enabled = false, -- change later
         icons = {
             {icon = data.raw["item"]["se-scrap"].icon, icon_size = data.raw["item"]["se-scrap"].icon_size},
             {icon = data.raw["item"][name].icon, icon_size = data.raw["item"][name].icon_size, scale = 0.33}
