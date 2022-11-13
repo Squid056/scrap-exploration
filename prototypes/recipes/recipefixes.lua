@@ -1,5 +1,5 @@
 local data_util = require("__space-exploration__/data_util")
-
+local util = require("util")
 for i, effect in pairs(data.raw["technology"]["se-recycling-facility"].effects)
 do
     if effect.type == "unlock-recipe" and effect.recipe == "landfill-se-scrap"
@@ -336,20 +336,21 @@ Add_result("se-experimental-genetic-data",
 
 --#region DSS changes (WIP)
 
-Redefine_ingredients_table("se-naquium-ingot-to-plate", {
-    {type = "item", name = "se-naquium-ingot", amount = 1},
-    {type = "item", name = "tank", amount = 1},
-    {type = "item", name = "explosive-uranium-cannon-shell", amount = 1},
-    {type = "item", name = "se-heavy-girder", amount = 10},
-})
-Redefine_results_table("se-naquium-ingot-to-plate", {
-    {type = "item", name = "se-naquium-plate", amount = 10},
-    {type = "item", name = "tank", probability = 0.999, amount = 1},
-    {type = "item", name = "se-heavy-girder", amount = 9},
-    {type = "item", name = "radiation-scrap", probability = 0.5, amount_min = 1, amount_max = 5}
+if settings.startup["naquium-plate-tank"].value == true then
+    Redefine_ingredients_table("se-naquium-ingot-to-plate", {
+        {type = "item", name = "se-naquium-ingot", amount = 1},
+        {type = "item", name = "tank", amount = 1},
+        {type = "item", name = "explosive-uranium-cannon-shell", amount = 1},
+        {type = "item", name = "se-heavy-girder", amount = 10},
+    })
+    Redefine_results_table("se-naquium-ingot-to-plate", {
+        {type = "item", name = "se-naquium-plate", amount = 10},
+        {type = "item", name = "tank", probability = 0.999, amount = 1},
+        {type = "item", name = "se-heavy-girder", amount = 9},
+        {type = "item", name = "radiation-scrap", probability = 0.5, amount_min = 1, amount_max = 5}
 
-})
-
+    })
+end
 --#endregion
 
 --#region Matter fusion changes (mostly just scrap swaps)

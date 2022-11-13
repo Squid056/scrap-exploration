@@ -95,6 +95,7 @@ data:extend({
         --order = ""
         energy_required = 20,
         enabled = false,
+        hidden = true, -- CHANGE LATER? possibly remove from mod.
         category = "smelting",
         icon = data.raw["item"]["se-scrap"].icon,
         icon_size = 64,
