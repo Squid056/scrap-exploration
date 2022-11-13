@@ -51,7 +51,7 @@ data:extend({
         name = "raw-scrap-3",
         order = "a[recycling]",
         energy_required = 1,
-        enabled = true, -- lock behind technology later.
+        enabled = true,
         allow_decomposition = false,
         category = "pulverising",
         subgroup = "recycling",
@@ -75,6 +75,7 @@ data:extend({
         --order = ""
         energy_required = 1,
         enabled = false,
+        allow_decomposition = false,
         category = "hard-recycling",
         icon = data.raw["item"]["se-scrap"].icon,
         icon_size = 64,
@@ -95,6 +96,7 @@ data:extend({
         --order = ""
         energy_required = 20,
         enabled = false,
+        allow_decomposition = false,
         hidden = true, -- CHANGE LATER? possibly remove from mod.
         category = "smelting",
         icon = data.raw["item"]["se-scrap"].icon,
@@ -119,7 +121,7 @@ data:extend({
         energy_required = 10,
         enabled = false,
         category = "chemistry",
-        
+        allow_decomposition = false,
         icons =  data_util.sub_icons(data.raw.item["se-contaminated-scrap"].icon, data.raw.fluid["water"].icon),
         subgroup = "recycling",
         ingredients = {
@@ -141,6 +143,7 @@ data:extend({
         energy_required = 10,
         enabled = false,
         category = "chemistry",
+        allow_decomposition = false,
         icons = data.raw.recipe["se-scrap-decontamination"].icons,
         subgroup = "recycling",
         ingredients = {
@@ -161,6 +164,7 @@ data:extend({
         --order = ""
         energy_required = 10,
         enabled = false,
+        allow_decomposition = false,
         category = "pulverising",
         icons = data_util.transition_icons(
         {
@@ -185,6 +189,7 @@ data:extend({
         --order = ""
         energy_required = 5,
         enabled = false,
+        allow_decomposition = false,
         category = "pulverising",
         icons = data_util.transition_icons(
         {
@@ -210,6 +215,7 @@ data:extend({
         --order = ""
         energy_required = 120,
         enabled = false,
+        allow_decomposition = false,
         category = "space-decontamination",
         icons = data_util.transition_icons(
         {
@@ -241,6 +247,7 @@ data:extend({
         --order = ""
         energy_required = 10,
         enabled = false,
+        allow_decomposition = false,
         category = "space-decontamination",
         icons = data_util.transition_icons(
         {
@@ -276,7 +283,7 @@ data_util.tech_lock_recipes("se-space-mechanical-laboratory", {"scrap-compressio
 --data_util.tech_lock_recipes("se-space-mechanical-laboratory", "scrap-decompression")
 data_util.tech_lock_recipes("se-space-decontamination-facility", {"radiation-scrap-cleaning-slow", "radiation-scrap-cleaning-fast"})
 --data_util.tech_lock_recipes("se-space-decontamination-facility", "radiation-scrap-cleaning-fast")
-
+--data_util.tech_lock_recipes("se-pulveriser", "raw-scrap-3")
 
 local function raw_scrap_smelting(name, count, probability, outcount)
     data:extend({
@@ -284,6 +291,7 @@ local function raw_scrap_smelting(name, count, probability, outcount)
         type = "recipe",
         name = "raw-scrap-" .. name,
         energy_required = 5,
+        allow_decomposition = false,
         category = "scrap-smelting",
         order = "a[recycling]-a" .. name,
         enabled = false, -- change later

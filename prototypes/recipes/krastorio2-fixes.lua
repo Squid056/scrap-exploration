@@ -25,5 +25,12 @@ if postprocess_dependency then
     --#endregion
 
 
-
 end
+
+-- k2 recipe add-ons that (for some reason) are not done in SE postprocess, 
+-- can still be changed by us so they are safe todo outside of dependency check
+
+-- modernized to match with all other recipes.
+
+data.raw.recipe["rare-metals-vulcanite"].icons = data_util.sub_icons(data.raw.item["rare-metals"].icon, data.raw.fluid["se-pyroflux"].icon)
+data_util.replace_or_add_ingredient("rare-metals-vulcanite", "se-vulcanite-block", "se-pyroflux", 10, true)
