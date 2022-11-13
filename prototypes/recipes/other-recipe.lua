@@ -30,7 +30,7 @@ data:extend({
         energy_required = 1,
         enabled = true, -- lock behind technology later.
         category = "smelting",
-        subgroup = "recycling",
+        subgroup = "iron",
         icons = data_util.transition_icons(
             {
                 icon = data.raw.item["iron-stick"].icon,
@@ -55,7 +55,7 @@ data:extend({
         energy_required = 1,
         enabled = true, -- lock behind technology later.
         category = "smelting",
-        subgroup = "recycling",
+        subgroup = "copper",
         icons = data_util.transition_icons(
             {
                 icon = data.raw.item["copper-cable"].icon,
@@ -82,8 +82,7 @@ data:extend({
         category = "space-laser",
         always_show_made_in = true,
         main_product = "se-quantum-phenomenon-data",
-        icon = data.raw.recipe["se-quantum-phenomenon-data"].icon,
-        icon_size = data.raw.recipe["se-quantum-phenomenon-data"].icon_size,
+        icons = data_util.sub_icons(data.raw.item["se-quantum-phenomenon-data"].icon, data.raw.item["logistic-robot"].icon),
         subgroup = "data-energy",
         ingredients = {
             {type = "item", name = "se-empty-data", amount = 3},
