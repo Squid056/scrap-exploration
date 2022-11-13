@@ -99,6 +99,34 @@ data:extend({
             {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
         }
     },
+    {
+        type = "recipe",
+        name = "se-observation-frame-broken",
+        order = "z-01",
+        energy_required = 10,
+        enabled = false,
+        category = "space-manufacturing",
+        icons = data_util.transition_icons(
+        {
+            icon = data.raw.item["se-observation-frame-broken"].icon,
+            icon_size = data.raw.item["se-observation-frame-broken"].icon_size, scale = 0.5
+        },
+        {
+            icon = data.raw.item["se-observation-frame-blank"].icon,
+            icon_size = data.raw.item["se-observation-frame-blank"].icon_size, scale = 0.5
+        }),
+        subgroup = "observation-frame",
+        main_product = "se-observation-frame-blank",
+        ingredients = {
+            {type = "item", name = "se-observation-frame-broken", amount = 5},
+            {type = "fluid", name = "light-oil", amount = 5},
+            {type = "item", name = "glass", amount = 1},
+        },
+        results = {
+            {type = "item", name = "se-observation-frame-blank", probability = 0.9, amount = 5},
+            {type = "item", name = "se-scrap", probability = 0.1, amount = 8},
+        }
+    },
 --[[    {
         type = "recipe",
         name = "experimental-fish-growth",

@@ -191,6 +191,11 @@ add_result("nuclear-fuel-reprocessing",
     {type = "item", name = "radiation-scrap", amount_min = 1, amount_max = 2}
 )
 
+data.raw.recipe["se-delivery-cannon-pack-se-contaminated-scrap"].hidden = true
+redefine_ingredients_table("se-delivery-cannon-pack-se-scrap", {
+    {type = "item", name = "se-delivery-cannon-capsule", amount = 1},
+    {type = "item", name = "compressed-scrap", amount = 20},
+})
 
 --#region material science changes
 redefine_results_table("se-impact-shielding-data", {
@@ -242,6 +247,7 @@ redefine_results_table("se-ballistic-shielding-data", {
 data.raw.recipe["se-ballistic-shielding-data"].energy_required = 50
 
 --#endregion
+
 --#region energy science changes (minor-ish)
 
 add_result("se-radiation-data",
@@ -335,7 +341,7 @@ redefine_ingredients_table("se-naquium-ingot-to-plate", {
 })
 redefine_results_table("se-naquium-ingot-to-plate", {
     {type = "item", name = "se-naquium-plate", amount = 10},
-    {type = "item", name = "tank", amount = 1},
+    {type = "item", name = "tank", probability = 0.999, amount = 1},
     {type = "item", name = "se-heavy-girder", amount = 9},
     {type = "item", name = "radiation-scrap", probability = 0.5, amount_min = 1, amount_max = 5}
 
@@ -364,5 +370,31 @@ data_util.replace_or_add_result("se-matter-fusion-berylium", "se-contaminated-sc
 data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "radiation-scrap", 1)
 
 data_util.replace_or_add_result("se-matter-fusion-iridium", "se-contaminated-scrap", "radiation-scrap", 1)
+
+--#endregion
+
+--#region astro observation data changes 
+data_util.tech_lock_recipes("se-space-telescope", "se-observation-frame-broken")
+
+local function replace_observation_data(type)
+    local data = "se-observation-frame-" .. type
+    data_util.replace_or_add_result(data, data, data, nil, false, 1, 1, 0.98)
+    add_result(data, {type = "item", name = "se-observation-frame-broken", probability = 0.02, amount = 1})   
+end
+-- basic observation 
+replace_observation_data("radio")
+replace_observation_data("microwave")
+replace_observation_data("infrared")
+replace_observation_data("visible")
+replace_observation_data("uv")
+
+-- xray and gamma observation
+data_util.replace_or_add_result("se-observation-frame-xray", "se-observation-frame-xray", "se-observation-frame-xray", nil, false, 12, 12, 0.92)
+add_result("se-observation-frame-xray", {type = "item", name = "se-observation-frame-broken", probability = 0.08, amount = 12})
+--data_util.remove_result_sub("se-observation-frame-xray", "se-scrap")
+
+data_util.replace_or_add_result("se-observation-frame-gammaray", "se-observation-frame-gammaray", "se-observation-frame-gammaray", nil, false, 12, 12, 0.92)
+add_result("se-observation-frame-gammaray", {type = "item", name = "se-observation-frame-broken", probability = 0.08, amount = 12})
+--data_util.remove_result_sub("se-observation-frame-gamma", "se-scrap")
 
 --#endregion

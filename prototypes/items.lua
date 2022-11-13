@@ -58,12 +58,22 @@ data:extend({
         icons = 
         {
         {
-        icon = data.raw["item"]["iron-plate"].icon,
-        tint = {r=0.2,g=0.2,b=0,a=0.3},
+            icon = data.raw["item"]["iron-plate"].icon,
+            tint = {r=0.2,g=0.2,b=0,a=0.3},
         }
         },
         icon_size = data.raw["item"]["iron-plate"].icon_size,
         item_group = "production",
+        order = "z-01"
+    },
+    {
+        name = "se-observation-frame-broken",
+        type = "item",
+        stack_size = 200,
+        icon = data.raw["item"]["se-observation-frame-blank"].icon,
+        icon_size = data.raw["item"]["se-observation-frame-blank"].icon_size,
+        item_group = "intermediate-products",
+        subgroup = "observation-frame",
         order = "z-01"
     },
 })
