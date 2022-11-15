@@ -25,8 +25,8 @@ data:extend({
         name = "raw-scrap",
         type = "item",
         stack_size = 100,
-        icon = data.raw["item"]["se-scrap"].icon,
-        icon_size = data.raw["item"]["se-scrap"].icon_size,
+        icon = "__scrap-exploration__/graphics/Raw_scrap.png",
+        icon_size = 64,
         item_group = "intermediate-products",
         subgroup = "recycling",
         order = "z-01"
@@ -45,8 +45,8 @@ data:extend({
         name = "radiation-scrap",
         type = "item",
         stack_size = 50,
-        icon = data.raw["item"]["se-scrap"].icon,
-        icon_size = data.raw["item"]["se-scrap"].icon_size,
+        icon = "__scrap-exploration__/graphics/Radioactive_waste.png",
+        icon_size = 63,
         item_group = "intermediate-products",
         subgroup = "recycling",
         order = "z-05"
