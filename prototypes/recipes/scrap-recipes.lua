@@ -66,7 +66,7 @@ data:extend({
             {name = "copper-ore", probability = 0.05 , amount = 1 },
             {name = "stone", probability = 0.05 , amount = 1 },
             {name = "coal", probability = 0.05 , amount = 1 },
-            {name = "raw-scrap", probability = 0.33, amount = 5},
+            {name = "raw-scrap", probability = 0.72, amount = 10},
         }
     },
     {
@@ -202,11 +202,10 @@ data:extend({
         }),
         subgroup = "recycling",
         ingredients = {
-            {type = "item", name = "compressed-scrap", amount = 20},
+            {type = "item", name = "compressed-scrap", amount = 1},
         },
         results = {
         {type = "item", name = "se-scrap", probability = 0.96, amount = 20},
-        {type = "item", name = "raw-scrap",probability = 0.04, amount = 10},
         }
     },
     {

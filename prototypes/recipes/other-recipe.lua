@@ -94,7 +94,7 @@ data:extend({
             {type = "item", name = "se-junk-data", probability = 0.10, amount = 1},
             {type = "fluid", name = "se-space-coolant-hot", amount = 25},
             {type = "item", name = "construction-robot", probability = 0.15, amount = 1},
-            {type = "item", name = "logistic-robot", probability = 0.82, amount = 1},
+            {type = "item", name = "logistic-robot", probability = 0.84, amount = 1},
             {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
         }
     },
