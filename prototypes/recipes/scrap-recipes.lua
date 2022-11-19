@@ -205,7 +205,8 @@ data:extend({
             {type = "item", name = "compressed-scrap", amount = 1},
         },
         results = {
-        {type = "item", name = "se-scrap", probability = 0.96, amount = 20},
+            {type = "item", name = "se-scrap", probability = 0.96, amount = 20},
+            {type = "item", name = "raw-scrap", probability = 0.03, amount = 200},
         }
     },
     {

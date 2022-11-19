@@ -1,6 +1,17 @@
 
 
     
+
+data:extend({
+    {
+        name = "scrap",
+        type = "item-subgroup",
+        group = "resources",
+        order = "s-"
+    }
+})
+
+
     --scrap furnace
 data:extend({ 
     {
@@ -28,28 +39,29 @@ data:extend({
         icon = "__scrap-exploration__/graphics/Raw_scrap.png",
         icon_size = 64,
         item_group = "intermediate-products",
-        subgroup = "recycling",
-        order = "z-01"
+        subgroup = "scrap",
+        order = "01"
     },
     {
         name = "compressed-scrap",
         type = "item",
         stack_size = 20,
-        icon = data.raw["item"]["se-scrap"].icon,
-        icon_size = data.raw["item"]["se-scrap"].icon_size,
+        --icon = "__scrap-exploration__/graphics/Compressed_scrap.png",
+        icon = "__space-exploration-graphics__/graphics/icons/scrap-stacked.png", -- temp placeholder 
+        icon_size = 64,
         item_group = "intermediate-products",
-        subgroup = "recycling",
-        order = "z-04"
+        subgroup = "scrap",
+        order = "04"
     },
     {
         name = "radiation-scrap",
         type = "item",
         stack_size = 50,
         icon = "__scrap-exploration__/graphics/Radioactive_waste.png",
-        icon_size = 63,
+        icon_size = 64,
         item_group = "intermediate-products",
-        subgroup = "recycling",
-        order = "z-05"
+        subgroup = "scrap",
+        order = "05"
     },
     {
         name = "scrap-plate",

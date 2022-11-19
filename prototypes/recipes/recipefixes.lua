@@ -7,96 +7,15 @@ do
         table.remove(data.raw["technology"]["se-recycling-facility"].effects, i)
     end
 end
+-- move old scrap to new subgroup
+data.raw.item["se-scrap"].subgroup = "scrap"
+data.raw.item["se-contaminated-scrap"].subgroup = "scrap"
 -- scrap order edits (make raw scrap first)
-data.raw.item["se-scrap"].order = "z-02"
-data.raw.item["se-contaminated-scrap"].order = "z-03"
+data.raw.item["se-scrap"].order = "02"
+data.raw.item["se-contaminated-scrap"].order = "03"
 
 -- RECIPE EDITS
---[[
-local function redefine_results_table_sub(recipe, new_results, difficulty)
-    if difficulty == recipe then
-        if data.raw.recipe[recipe].results ~= nil then
-            data.raw.recipe[recipe].results = new_results
-        else
-            local current_result = recipe.result
-            data.raw.recipe[recipe].result = nil
-            table.insert(new_results, current_result)
-            data.raw.recipe[recipe].results = new_results
-        end
-    elseif difficulty == recipe.normal then
-        if data.raw.recipe[recipe].normal.results ~= nil then
-            data.raw.recipe[recipe].normal.results = new_results
-        else
-            local current_result = recipe.normal.result
-            data.raw.recipe[recipe].normal.result = nil
-            table.insert(new_results, current_result)
-            data.raw.recipe[recipe].normal.results = new_results
-        end
-    elseif difficulty == recipe.expensive then
-        if data.raw.recipe[recipe].expensive.results ~= nil then
-            data.raw.recipe[recipe].expensive.results = new_results
-        else
-            local current_result = recipe.expensive.result
-            data.raw.recipe[recipe].expensive.result = nil
-            table.insert(new_results, current_result)
-            data.raw.recipe[recipe].expensive.results = new_results
-        end
-    else return 
-    end
-end
 
-local function Redefine_results_table(recipe, new_results)
-    local difficulties = {recipe or nil, recipe.normal or nil, recipe.expensive or nil}
-    
-    for _, difficulty in pairs(difficulties) do
-        redefine_results_table_sub(recipe, new_results, difficulty)
-    end
-end
-
-local function Add_result(recipe, new_result)
-    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
-
-    for _, difficulty in pairs(difficulties) do
-        local recipe = difficulty
-
-        if recipe.results == nil then
-            local current_result = recipe.result
-            local new_results_table = {current_result, new_result}
-            recipe.results = new_results_table
-        else
-            table.insert(recipe.results, new_result)
-        end
-    end
-end
-
-local function Add_ingredient(recipe, new_ingredient)
-    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
-
-    for _, difficulty in pairs(difficulties) do
-        local recipe = difficulty
-        
-        table.insert(recipe.ingredients, new_ingredient)
-    end
-end
-
-local function Redefine_ingredients_table(recipe, new_ingredients)
-    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
-    
-    for _, diffculty in pairs(difficulties) do
-        diffculty.ingredients = new_ingredients       
-    end
-end
-
-local function remove_result(recipe, to_remove, replace_with)   
-    local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
-
-    for _, difficulty in pairs(difficulties) do
-        for i, value in pairs(difficulties) do
-            
-        end
-    end
-end
-]]
 
 Redefine_results_table("se-broken-data-scrapping", {
     {type = "item", name = "se-scrap", probability = 0.9, amount = 5},
@@ -127,11 +46,10 @@ lrf.main_product = "se-liquid-rocket-fuel"
 data_util.replace_or_add_result("se-liquid-rocket-fuel", nil , "raw-scrap", 2)
 
 if not mods["Krastorio2"] then
-
-Redefine_results_table("se-rocket-fuel-from-water-copper", {
-    {type = "item", name = "rocket-fuel", amount = 1},
-    {type = "item", name = "raw-scrap", amount_min = 50, amount_max = 100},
-})
+    Redefine_results_table("se-rocket-fuel-from-water-copper", {
+        {type = "item", name = "rocket-fuel", amount = 1},
+        {type = "item", name = "raw-scrap", amount_min = 50, amount_max = 100},
+    })
 end 
 
 Redefine_results_table("se-bio-sludge-decontamination", {
