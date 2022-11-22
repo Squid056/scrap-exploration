@@ -15,14 +15,14 @@ data:extend({
     {
         type = "technology",
         name = "scrap-furnace",
-        icon_size = 256,
+        icon_size = 64,
         icon_mipmaps = 4,
-        icon = "__base__/graphics/technology/steel-processing.png",
+        icon = "__scrap-exploration__/graphics/Raw_scrap.png", -- temp icon 
         effects =
         {
-            {type = "unlock-recipe", recipe = "scrap-furnace"},
             {type = "unlock-recipe", recipe = "raw-scrap-1"},
             {type = "unlock-recipe", recipe = "raw-scrap-2"},
+            {type = "unlock-recipe", recipe = "raw-scrap-3"},
             {type = "unlock-recipe", recipe = "iron-stick-melting"},
             {type = "unlock-recipe", recipe = "copper-cable-melting"},
         },
@@ -44,7 +44,7 @@ data:extend({
         },
         order = "e-g"
     },
-    {
+--[[    {
         type = "technology",
         name = "scrap-plate",
         icon_size = 256,
@@ -73,7 +73,7 @@ data:extend({
             "scrap-furnace",
         },
         order = "e-g"
-    }
+    }]]
 
 
 })

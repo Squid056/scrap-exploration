@@ -3,27 +3,6 @@ local data_util = require( "__space-exploration__.data_util" )
 
 data:extend({
     {
-    type = "recipe",
-    name = "scrap-furnace",
-    order = "c[electric-furnace]-c",
-    energy_required = 5,
-    enabled = true, -- lock behind technology later.
-    category = "crafting",
-    subgroup = "smelting-machine",
-    icon = data.raw["item"]["electric-furnace"].icon,
-    icon_size = 32,
-    ingredients = {
-        {"se-heat-shielding", 5},
-        {"copper-cable", 20},
-        {"steel-plate", 10},
-        {"engine-unit", 5},
-        {"iron-gear-wheel", 10},
-    },
-    results = {
-        {name = "scrap-furnace", amount = 1},
-    }
-    },
-    {
         type = "recipe",
         name = "iron-stick-melting",
         order = "b[recycling]-a",

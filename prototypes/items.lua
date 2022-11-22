@@ -8,27 +8,8 @@ data:extend({
         type = "item-subgroup",
         group = "resources",
         order = "s-"
-    }
+    },
 })
-
-
-    --scrap furnace
-data:extend({ 
-    {
-    icon = data.raw["furnace"]["electric-furnace"].icon,
-    icon_mipmaps = 4,
-    icon_size = 64,
-    name = "scrap-furnace",
-    order = "c[electric-furnace]-c",
-    place_result = "scrap-furnace",
-    stack_size = 50,
-    subgroup = "production-machine",
-    type = "item"
-    }
-})
-
-
-
 
     --scrap
 data:extend({ 

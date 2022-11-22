@@ -9,5 +9,6 @@
       "space-exploration >= 0.6.89",
       "? Krastorio2 >= 1.3.6"
     ],
-    "description": "Imagine playing Space Exploration, but there is more scrap."
+    "description": "Imagine playing Space Exploration, but there is more scrap.",
+    "homepage": "https://github.com/Squid056/scrap-exploration"
   }

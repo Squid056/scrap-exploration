@@ -15,8 +15,6 @@ data.raw.item["se-scrap"].order = "02"
 data.raw.item["se-contaminated-scrap"].order = "03"
 
 -- RECIPE EDITS
-
-
 Redefine_results_table("se-broken-data-scrapping", {
     {type = "item", name = "se-scrap", probability = 0.9, amount = 5},
     {type = "item", name = "raw-scrap", probability = 0.1, amount_min = 1, amount_max = 10}
@@ -27,6 +25,7 @@ Redefine_results_table("se-scrap-recycling", {
     {type = "item", name = "raw-scrap", amount = 10},
     {type = "fluid", name = "heavy-oil", probability = 0.15, amount = 1}
 })
+data.raw.recipe["se-scrap-recycling"].subgroup = "scrap"
 data.raw.recipe["se-scrap-recycling"].icons = data_util.transition_icons(
     {
         icon = data.raw.item["se-scrap"].icon,
@@ -37,6 +36,15 @@ data.raw.recipe["se-scrap-recycling"].icons = data_util.transition_icons(
         icon_size = data.raw.item["raw-scrap"].icon_size, scale = 0.5
     }  
 )
+
+Redefine_results_table("se-scrap-decontamination", {
+    {type = "item", name = "se-scrap", amount = 20},
+    {type = "item", name = "raw-scrap",probability = 0.50, amount_min = 1, amount_max = 10},
+    {type = "fluid", name = "se-contaminated-bio-sludge", amount = 1},
+    {type = "fluid", name = "se-contaminated-space-water", amount = 1},
+    {type = "item", name = "uranium-ore",probability = 0.01, amount_min = 1, amount_max = 3},
+})
+data.raw.recipe["se-scrap-decontamination"].subgroup = "scrap"
 
 -- lrf shenanigains
 local lrf = data.raw.recipe["se-liquid-rocket-fuel"]
@@ -63,14 +71,6 @@ Redefine_results_table("se-space-water-decontamination", {
     {type = "fluid", name = "se-contaminated-bio-sludge", amount = 1}
 })
 
-Redefine_results_table("se-scrap-decontamination", {
-    {type = "item", name = "se-scrap", amount = 20},
-    {type = "item", name = "raw-scrap",probability = 0.50, amount_min = 1, amount_max = 10},
-    {type = "fluid", name = "se-contaminated-bio-sludge", amount = 1},
-    {type = "fluid", name = "se-contaminated-space-water", amount = 1},
-    {type = "item", name = "uranium-ore",probability = 0.01, amount_min = 1, amount_max = 3},
-})
-
 Redefine_results_table("se-data-storage-substrate", {
     {type = "item", name = "raw-scrap", amount_min = 1, amount_max = 5},
     {type = "item", name = "se-data-storage-substrate", amount = 1},
@@ -78,14 +78,14 @@ Redefine_results_table("se-data-storage-substrate", {
 })
 
 Redefine_results_table("se-data-storage-substrate-cleaned", {
-    {type = "item", name = "se-scrap", probability = 0.05, amount_min = 1, amount_max = 5},
+    {type = "item", name = "se-scrap", probability = 0.01, amount = 1},
     {type = "item", name = "se-data-storage-substrate-cleaned", amount = 1},
     {type = "fluid", name = "se-contaminated-space-water", amount = 5},
 })
 
 Redefine_results_table("se-machine-learning-data", {
     {type = "item", name = "se-machine-learning-data", amount = 1},
-    {type = "item", name = "se-scrap", probability = 0.3, amount_min = 1, amount_max = 2},
+    {type = "item", name = "se-scrap", amount_min = 0, amount_max = 2},
     {type = "fluid", name = "se-space-coolant-hot", amount = 5},
     {type = "item", name = "copper-cable", amount_min = 2, amount_max = 6},
 })
@@ -99,12 +99,12 @@ Redefine_results_table("se-canister", {
     {type = "item", name = "se-canister", amount = 1},
     {type = "item", name = "se-scrap", probability = 0.5, amount_min = 2, amount_max = 5},
 })
-
+--[[ disabled for balacned -- no contaminated scrap on ground
 Redefine_results_table("se-used-lifesupport-canister-cleaning", {
     {type = "item", name = "se-empty-lifesupport-canister", amount = 1},
     {type = "item", name = "se-contaminated-scrap", probability = 0.8, amount_min = 1, amount_max = 5},
 })
-
+]]
 
 Add_result("nuclear-fuel-reprocessing",
     {type = "item", name = "radiation-scrap", amount_min = 1, amount_max = 2}
@@ -287,7 +287,7 @@ data_util.replace_or_add_result("se-matter-fusion-vulcanite", "se-contaminated-s
 
 data_util.replace_or_add_result("se-matter-fusion-cryonite", "se-contaminated-scrap", "radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-berylium", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-beryllium", "se-contaminated-scrap", "radiation-scrap", 1)
 
 data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "radiation-scrap", 1)
 
