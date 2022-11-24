@@ -38,6 +38,8 @@ function Redefine_results_table(recipe, new_results)
     end
 end
 
+---@param recipe string
+---@param new_result table
 function Add_result(recipe, new_result)
     local difficulties = {data.raw.recipe[recipe], data.raw.recipe[recipe].normal or nil, data.raw.recipe[recipe].expensive or nil}
 
