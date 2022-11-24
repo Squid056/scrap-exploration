@@ -23,8 +23,8 @@ data:extend({
             {type = "unlock-recipe", recipe = "raw-scrap-1"},
             {type = "unlock-recipe", recipe = "raw-scrap-2"},
             {type = "unlock-recipe", recipe = "raw-scrap-3"},
-            {type = "unlock-recipe", recipe = "iron-stick-melting"},
-            {type = "unlock-recipe", recipe = "copper-cable-melting"},
+            {type = "unlock-recipe", recipe = "sc-iron-stick-melting"},
+            {type = "unlock-recipe", recipe = "sc-copper-cable-melting"},
         },
         unit =
         {

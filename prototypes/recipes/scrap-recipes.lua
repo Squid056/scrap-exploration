@@ -1,5 +1,5 @@
 local data_util = require( "__space-exploration__.data_util" )
-
+local mod_prefix = "sc-"
 data:extend({
     {
         type = "recipe",
@@ -13,7 +13,7 @@ data:extend({
         icon = data.raw["item"]["se-scrap"].icon,
         icon_size = 32,
         ingredients = {
-            {"raw-scrap", 10}
+            {"sc-raw-scrap", 10}
         },
         results = {
             {name = "iron-ore", probability = 0.25 , amount = 1 },
@@ -34,7 +34,7 @@ data:extend({
         icon = data.raw["item"]["se-scrap"].icon,
         icon_size = 32,
         ingredients = {
-            {"raw-scrap", 20}
+            {"sc-raw-scrap", 20}
         },
         results = {
             {name = "iron-plate", probability = 0.15 , amount = 1 },
@@ -58,7 +58,7 @@ data:extend({
         icon = data.raw["item"]["se-scrap"].icon,
         icon_size = 32,
         ingredients = {
-            {"raw-scrap", 10},
+            {"sc-raw-scrap", 10},
             {type = "fluid", name = "water", amount = 100},
         },
         results = {
@@ -66,7 +66,7 @@ data:extend({
             {name = "copper-ore", probability = 0.05 , amount = 1 },
             {name = "stone", probability = 0.05 , amount = 1 },
             {name = "coal", probability = 0.05 , amount = 1 },
-            {name = "raw-scrap", probability = 0.72, amount = 10},
+            {name = "sc-raw-scrap", probability = 0.72, amount = 10},
         }
     },
     {
@@ -84,7 +84,7 @@ data:extend({
             {"se-scrap", 1}
         },
         results = {
-            {name = "raw-scrap", amount = 10 },
+            {name = "sc-raw-scrap", amount = 10 },
             {type = "fluid", name = "heavy-oil", probability = 0.15, amount = 1},
         },
         hidden = true -- currently unused code as original se code has been altered for this purpose 
@@ -116,7 +116,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "scrap-compression",
+        name = mod_prefix .. "scrap-compression",
         order = "s-c",
         energy_required = 10,
         enabled = false,
@@ -128,20 +128,20 @@ data:extend({
             icon_size = data.raw.item["se-scrap"].icon_size, scale = 0.5
         },
         {
-            icon = data.raw.item["compressed-scrap"].icon,
-            icon_size = data.raw.item["compressed-scrap"].icon_size, scale = 0.5
+            icon = data.raw.item["sc-compressed-scrap"].icon,
+            icon_size = data.raw.item["sc-compressed-scrap"].icon_size, scale = 0.5
         }),
         subgroup = "scrap",
         ingredients = {
             {type = "item", name = "se-scrap", amount = 20},
         },
         results = {
-        {type = "item", name = "compressed-scrap", amount = 1},
+        {type = "item", name = "sc-compressed-scrap", amount = 1},
         }
     },
     {
         type = "recipe",
-        name = "scrap-decompression",
+        name = mod_prefix .. "scrap-decompression",
         order = "s-c",
         energy_required = 5,
         enabled = false,
@@ -149,8 +149,8 @@ data:extend({
         category = "pulverising",
         icons = data_util.transition_icons(
         {
-            icon = data.raw.item["compressed-scrap"].icon,
-            icon_size = data.raw.item["compressed-scrap"].icon_size, scale = 0.5
+            icon = data.raw.item["sc-compressed-scrap"].icon,
+            icon_size = data.raw.item["sc-compressed-scrap"].icon_size, scale = 0.5
         },
         {
             icon = data.raw.item["se-scrap"].icon,
@@ -158,13 +158,25 @@ data:extend({
         }),
         subgroup = "scrap",
         ingredients = {
-            {type = "item", name = "compressed-scrap", amount = 1},
+            {type = "item", name = "sc-compressed-scrap", amount = 1},
         },
         results = {
             {type = "item", name = "se-scrap", probability = 0.98, amount = 20},
-            {type = "item", name = "compressed-scrap", probability = 0.01, amount = 1},
+            {type = "item", name = "sc-compressed-scrap", probability = 0.01, amount = 1},
         }
+    }
+})
+
+local icon_fast_gel = data_util.transition_icons(
+    {
+        icon = data.raw.item["radiation-scrap"].icon,
+        icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
     },
+    {
+        icon = data.raw.item["se-contaminated-scrap"].icon,
+        icon_size = data.raw.item["se-contaminated-scrap"].icon_size, scale = 0.5
+    })
+data:extend({
     {
         type = "recipe",
         name = "radiation-scrap-cleaning-slow",
@@ -206,14 +218,14 @@ data:extend({
         allow_decomposition = false,
         category = "space-decontamination",
         icons = data_util.transition_icons(
-        {
-            icon = data.raw.item["radiation-scrap"].icon,
-            icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
-        },
-        {
-            icon = data.raw.item["se-contaminated-scrap"].icon,
-            icon_size = data.raw.item["se-contaminated-scrap"].icon_size, scale = 0.5
-        }),
+            {
+                icon = data.raw.item["radiation-scrap"].icon,
+                icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
+            },
+            {
+                icon = data.raw.item["se-contaminated-scrap"].icon,
+                icon_size = data.raw.item["se-contaminated-scrap"].icon_size, scale = 0.5
+            }),
         subgroup = "scrap",
         ingredients = {
             {type = "item", name = "radiation-scrap", amount = 10},
@@ -236,7 +248,7 @@ data:extend({
 -- lock recipes to x 
 data_util.tech_lock_recipes("se-recycling-facility", "scrap-to-raw-scrap")
 data_util.tech_lock_recipes("se-space-decontamination-facility", "scrap-decontamination-ground")
-data_util.tech_lock_recipes("se-space-mechanical-laboratory", {"scrap-compression", "scrap-decompression"})
+data_util.tech_lock_recipes("se-space-mechanical-laboratory", {"sc-scrap-compression", "sc-scrap-decompression"})
 data_util.tech_lock_recipes("se-space-decontamination-facility", {"radiation-scrap-cleaning-slow", "radiation-scrap-cleaning-fast"})
 
 local function raw_scrap_smelting(ore_name, count, probability, outcount)
@@ -252,8 +264,8 @@ local function raw_scrap_smelting(ore_name, count, probability, outcount)
         enabled = true, -- change later
         icons = data_util.transition_icons(
         {
-            icon = data.raw.item["raw-scrap"].icon,
-            icon_size = data.raw.item["raw-scrap"].icon_size, scale = 0.5
+            icon = data.raw.item["sc-raw-scrap"].icon,
+            icon_size = data.raw.item["sc-raw-scrap"].icon_size, scale = 0.5
         },
         {
             icon = data.raw.item[ore_name].icon,
@@ -261,7 +273,7 @@ local function raw_scrap_smelting(ore_name, count, probability, outcount)
         }),
         ingredients =
         {
-            {"raw-scrap", count }
+            {"sc-raw-scrap", count }
         },
         results = {
             {name = ore_name, probability = probability, amount = outcount}

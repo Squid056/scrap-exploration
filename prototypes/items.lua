@@ -1,4 +1,4 @@
-
+local mod_prefix = "sc-"
 
     
 
@@ -14,7 +14,7 @@ data:extend({
     --scrap
 data:extend({ 
     {
-        name = "raw-scrap",
+        name = mod_prefix .. "raw-scrap",
         type = "item",
         stack_size = 100,
         icon = "__scrap-exploration__/graphics/Raw_scrap.png",
@@ -24,7 +24,7 @@ data:extend({
         order = "01"
     },
     {
-        name = "compressed-scrap",
+        name = mod_prefix .. "compressed-scrap",
         type = "item",
         stack_size = 20,
         --icon = "__scrap-exploration__/graphics/Compressed_scrap.png",
@@ -60,11 +60,11 @@ data:extend({
         order = "z-01"
     },
     {
-        name = "se-observation-frame-broken",
+        name = mod_prefix .. "observation-frame-broken",
         type = "item",
         stack_size = 200,
-        icon = data.raw["item"]["se-observation-frame-blank"].icon,
-        icon_size = data.raw["item"]["se-observation-frame-blank"].icon_size,
+        icon = "__scrap-exploration__/graphics/Damaged_observation_frame.png",
+        icon_size = 64,
         item_group = "intermediate-products",
         subgroup = "observation-frame",
         order = "z-01"
