@@ -3,7 +3,7 @@ local mod_prefix = "sc-"
 data:extend({
     {
         type = "recipe",
-        name = "raw-scrap-1",
+        name = mod_prefix .. "raw-scrap-1",
         order = "r-s-a",
         energy_required = 8,
         allow_decomposition = false,
@@ -24,7 +24,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "raw-scrap-2",
+        name = mod_prefix .. "raw-scrap-2",
         order = "r-s-b",
         energy_required = 15,
         allow_decomposition = false,
@@ -48,7 +48,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "raw-scrap-3",
+        name = mod_prefix .. "raw-scrap-3",
         order = "r-s-c",
         energy_required = 1,
         enabled = true,
@@ -92,7 +92,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "scrap-plate",
+        name = mod_prefix .. "scrap-plate",
         --order = ""
         energy_required = 20,
         enabled = false,
@@ -108,7 +108,7 @@ data:extend({
             {type = "fluid", name = "water", amount = 100},
         },
         results = {
-            {name = "scrap-plate", probability = 0.9, amount = 5 },            
+            {name = "sc-scrap-plate", probability = 0.9, amount = 5 },            
             {name = "se-scrap", probability = 0.1, amount = 10},
             {type = "fluid", name = "steam", amount = 98},
             
@@ -169,8 +169,8 @@ data:extend({
 
 local icon_fast_gel = data_util.transition_icons(
     {
-        icon = data.raw.item["radiation-scrap"].icon,
-        icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
+        icon = data.raw.item["sc-radiation-scrap"].icon,
+        icon_size = data.raw.item["sc-radiation-scrap"].icon_size, scale = 0.5
     },
     {
         icon = data.raw.item["se-contaminated-scrap"].icon,
@@ -179,7 +179,7 @@ local icon_fast_gel = data_util.transition_icons(
 data:extend({
     {
         type = "recipe",
-        name = "radiation-scrap-cleaning-slow",
+        name = mod_prefix .. "radiation-scrap-cleaning-slow",
         order = "rd-s-a",
         energy_required = 120,
         enabled = false,
@@ -187,8 +187,8 @@ data:extend({
         category = "space-decontamination",
         icons = data_util.transition_icons(
         {
-            icon = data.raw.item["radiation-scrap"].icon,
-            icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
+            icon = data.raw.item["sc-radiation-scrap"].icon,
+            icon_size = data.raw.item["sc-radiation-scrap"].icon_size, scale = 0.5
         },
         {
             icon = data.raw.item["se-contaminated-scrap"].icon,
@@ -196,7 +196,7 @@ data:extend({
         }),
         subgroup = "scrap",
         ingredients = {
-            {type = "item", name = "radiation-scrap", amount = 10},
+            {type = "item", name = "sc-radiation-scrap", amount = 10},
             {type = "fluid", name = "se-space-water", amount = 1000},
 
         },
@@ -211,7 +211,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "radiation-scrap-cleaning-fast",
+        name = mod_prefix .. "radiation-scrap-cleaning-fast",
         order = "rd-s-b",
         energy_required = 10,
         enabled = false,
@@ -219,8 +219,8 @@ data:extend({
         category = "space-decontamination",
         icons = data_util.transition_icons(
             {
-                icon = data.raw.item["radiation-scrap"].icon,
-                icon_size = data.raw.item["radiation-scrap"].icon_size, scale = 0.5
+                icon = data.raw.item["sc-radiation-scrap"].icon,
+                icon_size = data.raw.item["sc-radiation-scrap"].icon_size, scale = 0.5
             },
             {
                 icon = data.raw.item["se-contaminated-scrap"].icon,
@@ -228,7 +228,7 @@ data:extend({
             }),
         subgroup = "scrap",
         ingredients = {
-            {type = "item", name = "radiation-scrap", amount = 10},
+            {type = "item", name = "sc-radiation-scrap", amount = 10},
             {type = "fluid", name = "se-chemical-gel", amount = 250},
             {type = "fluid", name = "sulfuric-acid", amount = 25},
             {type = "item", name = "sand", amount = 25},
@@ -249,7 +249,7 @@ data:extend({
 data_util.tech_lock_recipes("se-recycling-facility", "scrap-to-raw-scrap")
 data_util.tech_lock_recipes("se-space-decontamination-facility", "scrap-decontamination-ground")
 data_util.tech_lock_recipes("se-space-mechanical-laboratory", {"sc-scrap-compression", "sc-scrap-decompression"})
-data_util.tech_lock_recipes("se-space-decontamination-facility", {"radiation-scrap-cleaning-slow", "radiation-scrap-cleaning-fast"})
+data_util.tech_lock_recipes("se-space-decontamination-facility", {"sc-radiation-scrap-cleaning-slow", "sc-radiation-scrap-cleaning-fast"})
 
 local function raw_scrap_smelting(ore_name, count, probability, outcount)
     local scrap_name = "raw-scrap-" .. ore_name

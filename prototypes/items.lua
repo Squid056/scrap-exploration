@@ -35,7 +35,7 @@ data:extend({
         order = "04"
     },
     {
-        name = "radiation-scrap",
+        name = mod_prefix .. "radiation-scrap",
         type = "item",
         stack_size = 50,
         icon = "__scrap-exploration__/graphics/Radioactive_waste.png",
@@ -44,8 +44,8 @@ data:extend({
         subgroup = "scrap",
         order = "05"
     },
-    {
-        name = "scrap-plate",
+    { -- temporary disable
+        name = mod_prefix .. "scrap-plate",
         type = "item",
         stack_size = 100,
         icons = 

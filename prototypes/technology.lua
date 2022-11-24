@@ -20,9 +20,9 @@ data:extend({
         icon = "__scrap-exploration__/graphics/Raw_scrap.png", -- temp icon 
         effects =
         {
-            {type = "unlock-recipe", recipe = "raw-scrap-1"},
-            {type = "unlock-recipe", recipe = "raw-scrap-2"},
-            {type = "unlock-recipe", recipe = "raw-scrap-3"},
+            {type = "unlock-recipe", recipe = "sc-raw-scrap-1"},
+            {type = "unlock-recipe", recipe = "sc-raw-scrap-2"},
+            {type = "unlock-recipe", recipe = "sc-raw-scrap-3"},
             {type = "unlock-recipe", recipe = "sc-iron-stick-melting"},
             {type = "unlock-recipe", recipe = "sc-copper-cable-melting"},
         },

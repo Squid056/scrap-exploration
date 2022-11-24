@@ -107,9 +107,9 @@ Redefine_results_table("se-used-lifesupport-canister-cleaning", {
 ]]
 
 Add_result("nuclear-fuel-reprocessing",
-    {type = "item", name = "radiation-scrap", amount_min = 1, amount_max = 2}
+    {type = "item", name = "sc-radiation-scrap", amount_min = 1, amount_max = 2}
 )
-
+data.raw.recipe["se-delivery-cannon-pack-se-scrap"].icon = "__space-exploration-graphics__/graphics/icons/scrap-stacked.png"
 data.raw.recipe["se-delivery-cannon-pack-se-contaminated-scrap"].hidden = true
 Redefine_ingredients_table("se-delivery-cannon-pack-se-scrap", {
     {type = "item", name = "se-delivery-cannon-capsule", amount = 1},
@@ -134,7 +134,7 @@ Add_result("se-material-testing-pack",
     {type = "item", name = "se-scrap", probability = 0.05, amount_min = 1, amount_max = 2}
 )
 
-data_util.replace_or_add_result("se-radiation-shielding-data", "se-contaminated-scrap", "radiation-scrap", 8)
+data_util.replace_or_add_result("se-radiation-shielding-data", "se-contaminated-scrap", "sc-radiation-scrap", 8)
 
 data_util.replace_or_add_result("se-pressure-containment-data", "se-scrap", "sc-compressed-scrap", 2)
 Add_result("se-pressure-containment-data",
@@ -170,11 +170,11 @@ data.raw.recipe["se-ballistic-shielding-data"].energy_required = 50
 --#region energy science changes (minor-ish)
 
 Add_result("se-radiation-data",
-    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+    {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )
 
 Add_result("se-quantum-phenomenon-data",
-    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+    {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )
 
 Redefine_ingredients_table("se-quantum-phenomenon-data", {
@@ -188,12 +188,12 @@ Redefine_results_table("se-quantum-phenomenon-data", {
     {type = "fluid", name = "se-space-coolant-hot", amount = 25},
     {type = "item", name = "construction-robot", probability = 0.84, amount = 1},
     {type = "item", name = "logistic-robot", probability = 0.15, amount = 1},
-    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+    {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 })
 data.raw.recipe["se-quantum-phenomenon-data"].energy_required = 20
 data.raw.recipe["se-quantum-phenomenon-data"].icons = data_util.sub_icons(data.raw.item["se-quantum-phenomenon-data"].icon, data.raw.item["construction-robot"].icon)
 
-data_util.tech_lock_recipes("se-space-catalogue-energy-2", "se-quantum-phenomenon-data-alternate")
+data_util.tech_lock_recipes("se-space-catalogue-energy-2", "sc-quantum-phenomenon-data")
 
 Redefine_ingredients_table("se-conductivity-data", {
     {type = "item", name = "electronic-circuit", amount = 2},
@@ -234,11 +234,11 @@ Add_result("se-space-mirror-alternate",
 --#region bio changes (minor)
 
 Add_result("se-radiation-exposure-data",
-    {type = "item", name = "radiation-scrap", probability = 0.1, amount = 1}
+    {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount = 1}
 )
 
 Add_result("se-radiation-exposure-resistance-data",
-    {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+    {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
 )
 
 Add_result("se-bioelectrics-data",
@@ -279,12 +279,12 @@ if settings.startup["naquium-plate-tank"].value == true then
         {type = "item", name = "se-naquium-plate", amount = 20},
         {type = "item", name = "tank", probability = 0.999, amount = 1},
         {type = "item", name = "se-heavy-girder", amount = 9},
-        {type = "item", name = "radiation-scrap", probability = 0.5, amount_min = 1, amount_max = 5}
+        {type = "item", name = "sc-radiation-scrap", probability = 0.5, amount_min = 1, amount_max = 5}
 
     })
 end
 
-data_util.replace_or_add_result("se-naquium-energy-data", "se-contaminated-scrap", "radiation-scrap", 15)
+data_util.replace_or_add_result("se-naquium-energy-data", "se-contaminated-scrap", "sc-radiation-scrap", 15)
 Add_result("se-naquium-energy-data", 
     {type = "item", name = "se-contaminated-scrap", amount = 10}
 )
@@ -293,23 +293,23 @@ Add_result("se-naquium-energy-data",
 
 --#region Matter fusion changes (mostly just scrap swaps)
 
-data_util.replace_or_add_result("se-matter-fusion-iron", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-iron", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-copper", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-copper", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-stone", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-stone", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-uranium", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-uranium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-vulcanite", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-vulcanite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-cryonite", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-cryonite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-beryllium", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-beryllium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-iridium", "se-contaminated-scrap", "radiation-scrap", 1)
+data_util.replace_or_add_result("se-matter-fusion-iridium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
 --#endregion
 

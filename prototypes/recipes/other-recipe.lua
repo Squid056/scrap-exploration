@@ -74,7 +74,7 @@ data:extend({
             {type = "fluid", name = "se-space-coolant-hot", amount = 25},
             {type = "item", name = "construction-robot", probability = 0.15, amount = 1},
             {type = "item", name = "logistic-robot", probability = 0.84, amount = 1},
-            {type = "item", name = "radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+            {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
         }
     },
     {
@@ -113,7 +113,6 @@ data:extend({
         enabled = true,
         category = "space-growth",
         subgroup = "specimen",
-        main_product = "raw-fish",
         icons = data_util.sub_icons("__base__/graphics/icons/fish.png", data.raw.item["se-experimental-bioculture"].icon),
         ingredients = {
             {name = "se-experimental-bioculture", amount = 10},

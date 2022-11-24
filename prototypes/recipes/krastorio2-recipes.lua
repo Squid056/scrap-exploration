@@ -1,9 +1,9 @@
 local data_util = require( "__space-exploration__.data_util" )
-
+local mod_prefix = "sc-"
 data:extend({
     {
         type = "recipe",
-        name = "mineral-water-filtration",
+        name = mod_prefix .. "mineral-water-filtration",
         order = "a",
         energy_required = 15,
         enabled = false, 
@@ -16,20 +16,20 @@ data:extend({
             icon_size = data.raw.fluid["mineral-water"].icon_size, scale = 0.5
         },
         {
-            icon = data.raw.item["raw-scrap"].icon,
-            icon_size = data.raw.item["raw-scrap"].icon_size, scale = 0.5
+            icon = data.raw.item["sc-raw-scrap"].icon,
+            icon_size = data.raw.item["sc-raw-scrap"].icon_size, scale = 0.5
         }),
         ingredients = {
             {type = "fluid", name = "mineral-water", amount = 100},
         },
         results = {
-            {name = "raw-scrap", amount_min = 1, amount_max = 30 },
+            {name = "sc-raw-scrap", amount_min = 1, amount_max = 30 },
             {type = "fluid", name = "water", amount = 95},
         }
     },
     {
         type = "recipe",
-        name = "se-dirty-water-filtration-holmium-alternate",
+        name = "sc-dirty-water-filtration-holmium",
         order = "a-b-2",
         energy_required = 4,
         enabled = false, 
@@ -52,7 +52,7 @@ data:extend({
     },
     {
         type = "recipe",
-        name = "se-dirty-water-filtration-iridium-alternate",
+        name = "sc-dirty-water-filtration-iridium",
         order = "a-b-2",
         energy_required = 4,
         enabled = false, 
@@ -76,7 +76,7 @@ data:extend({
 
 })
 
-data_util.tech_lock_recipes("se-processing-holmium", "se-dirty-water-filtration-holmium-alternate")
-data_util.tech_lock_recipes("se-processing-iridium", "se-dirty-water-filtration-iridium-alternate")
-data_util.tech_lock_recipes("kr-mineral-water-gathering", "mineral-water-filtration")
+data_util.tech_lock_recipes("se-processing-holmium", "sc-dirty-water-filtration-holmium")
+data_util.tech_lock_recipes("se-processing-iridium", "sc-dirty-water-filtration-iridium")
+data_util.tech_lock_recipes("kr-mineral-water-gathering", "sc-mineral-water-filtration")
 

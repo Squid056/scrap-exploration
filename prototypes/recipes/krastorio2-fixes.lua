@@ -8,19 +8,19 @@ if postprocess_dependency then
 
 
     Redefine_results_table("se-kr-rare-metal-substrate", {
-        {type = "item", name = "raw-scrap", amount_min = 1, amount_max = 5},
+        {type = "item", name = "sc-raw-scrap", amount_min = 1, amount_max = 5},
         {type = "item", name = "se-data-storage-substrate", amount = 2},
         {type = "item", name = "iron-stick", amount = 4},
     })
 
     --#region SE matter fusion edits
-    data_util.replace_or_add_result("se-matter-fusion-rare-metals", "se-contaminated-scrap", "radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-rare-metals", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-    data_util.replace_or_add_result("se-matter-fusion-raw-imersite", "se-contaminated-scrap", "radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-raw-imersite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-    data_util.replace_or_add_result("se-kr-matter-containment-data", "se-contaminated-scrap", "radiation-scrap", 10)
+    data_util.replace_or_add_result("se-kr-matter-containment-data", "se-contaminated-scrap", "sc-radiation-scrap", 10)
 
-    data_util.replace_or_add_result("se-kr-matter-liberation-data", "se-contaminated-scrap", "radiation-scrap", 10)
+    data_util.replace_or_add_result("se-kr-matter-liberation-data", "se-contaminated-scrap", "sc-radiation-scrap", 10)
 
     --#endregion
 
