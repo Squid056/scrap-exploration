@@ -1,6 +1,9 @@
 local data_util = require( "__space-exploration__.data_util" )
 local mod_prefix = "sc-"
 
+local observationchanges = not settings.startup["broken-observation-changes"].value
+local landfill_coal = not settings.startup["landfill-from-coal"].value
+
 data:extend({
     {
         type = "recipe",
@@ -25,7 +28,8 @@ data:extend({
         results = {
             {name = "iron-plate", amount = 1},
             {name = "sc-raw-scrap", amount = 1},
-        }
+        },
+        allow_decomposition = false
     },
     {
         type = "recipe",
@@ -50,7 +54,8 @@ data:extend({
         results = {
             {name = "copper-plate", amount = 1},
             {name = "sc-raw-scrap", amount = 1},
-        }
+        },
+        allow_decomposition = false
     },
     {
         type = "recipe",
@@ -64,17 +69,16 @@ data:extend({
         icons = data_util.sub_icons(data.raw.item["se-quantum-phenomenon-data"].icon, data.raw.item["logistic-robot"].icon),
         subgroup = "data-energy",
         ingredients = {
-            {type = "item", name = "se-empty-data", amount = 3},
+            {type = "item", name = "se-empty-data", amount = 5},
             {type = "fluid", name = "se-space-coolant-cold", amount = 25},
             {type = "item", name = "logistic-robot", amount = 1},
         },
         results = {
-            {type = "item", name = "se-quantum-phenomenon-data", probability = 0.85, amount = 3},
-            {type = "item", name = "se-junk-data", probability = 0.10, amount = 1},
+            {type = "item", name = "se-quantum-phenomenon-data", amount = 5},
             {type = "fluid", name = "se-space-coolant-hot", amount = 25},
             {type = "item", name = "construction-robot", probability = 0.15, amount = 1},
             {type = "item", name = "logistic-robot", probability = 0.84, amount = 1},
-            {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+            {type = "item", name = "sc-radiation-scrap", amount = 2}
         }
     },
     {
@@ -103,14 +107,15 @@ data:extend({
         results = {
             {type = "item", name = "se-observation-frame-blank", probability = 0.9, amount = 5},
             {type = "item", name = "se-scrap", probability = 0.1, amount = 8},
-        }
+        },
+        hidden = observationchanges -- Disable recipe if the changes are off
     },
     {
         type = "recipe",
         name = mod_prefix .. "experimental-fish-growth",
         order = "",
         energy_required = 60,
-        enabled = true,
+        enabled = false,
         category = "space-growth",
         subgroup = "specimen",
         icons = data_util.sub_icons("__base__/graphics/icons/fish.png", data.raw.item["se-experimental-bioculture"].icon),
@@ -121,7 +126,47 @@ data:extend({
         results = {
             {type = "item", name = "raw-fish", amount_min = 0, amount_max = 55},
             {type = "fluid", name = "se-contaminated-bio-sludge", amount_min = 50, amount_max = 150},
-            {type = "fluid", name = "se-contaminated-space-water", amount_min = 50, amount_max = 150}
         }
     },
+    {
+        type = "recipe",
+        name = mod_prefix .. "landfill-from-coal",
+        order = "z-b-coal",
+        energy_required = 1,
+        enabled = true,
+        category = "hard-recycling",
+        subgroup = "terrain",
+        main_product = "landfill",
+        icons = data_util.sub_icons(data.raw.item["landfill"].icon, data.raw.item["coal"].icon),
+        ingredients = {
+            {name = "coal", amount = 50},
+            
+        },
+        results = {
+            {type = "item", name = "landfill", amount = 1}
+        },
+        hidden = landfill_coal
+    },
+    {
+        type = "recipe",
+        name = mod_prefix .. "landfill-from-compressed-scrap",
+        order = "z-b-compressed-scrap",
+        energy_required = 1,
+        enabled = true,
+        category = "hard-recycling",
+        subgroup = "terrain",
+        main_product = "landfill",
+        icons = data_util.sub_icons(data.raw.item["landfill"].icon, data.raw.item["sc-compressed-scrap"].icon),
+        ingredients = {
+            {name = "sc-compressed-scrap", amount = 5},
+            
+        },
+        results = {
+            {type = "item", name = "landfill", amount = 1}
+        },
+        hidden = true -- not sure if this recipe is wanted as it simplifies the landfill processing
+    },
 })
+
+data_util.tech_lock_recipes("se-space-catalogue-4", "sc-experimental-fish-growth")
+data_util.tech_lock_recipes("se-space-telescope", "sc-observation-frame-broken")

@@ -5,13 +5,13 @@ data:extend({
         type = "recipe",
         name = mod_prefix .. "raw-scrap-1",
         order = "r-s-a",
-        energy_required = 8,
+        energy_required = 1,
         allow_decomposition = false,
         enabled = false, 
         category = "pulverising",
         subgroup = "scrap",
-        icon = data.raw["item"]["se-scrap"].icon,
-        icon_size = 32,
+        icon = "__scrap-exploration__/graphics/Raw_scrap.png",
+        icon_size = 64,
         ingredients = {
             {"sc-raw-scrap", 10}
         },
@@ -26,13 +26,13 @@ data:extend({
         type = "recipe",
         name = mod_prefix .. "raw-scrap-2",
         order = "r-s-b",
-        energy_required = 15,
+        energy_required = 5,
         allow_decomposition = false,
         enabled = false, 
         category = "smelting",
         subgroup = "scrap",
-        icon = data.raw["item"]["se-scrap"].icon,
-        icon_size = 32,
+        icon = "__scrap-exploration__/graphics/Raw_scrap.png",
+        icon_size = 64,
         ingredients = {
             {"sc-raw-scrap", 20}
         },
@@ -55,8 +55,8 @@ data:extend({
         allow_decomposition = false,
         category = "pulverising",
         subgroup = "scrap",
-        icon = data.raw["item"]["se-scrap"].icon,
-        icon_size = 32,
+        icon = "__scrap-exploration__/graphics/Raw_scrap.png",
+        icon_size = 64,
         ingredients = {
             {"sc-raw-scrap", 10},
             {type = "fluid", name = "water", amount = 100},
@@ -77,7 +77,7 @@ data:extend({
         enabled = false,
         allow_decomposition = false,
         category = "hard-recycling",
-        icon = data.raw["item"]["se-scrap"].icon,
+        icon = "__scrap-exploration__/graphics/Raw_scrap.png",
         icon_size = 64,
         subgroup = "scrap",
         ingredients = {
@@ -161,8 +161,7 @@ data:extend({
             {type = "item", name = "sc-compressed-scrap", amount = 1},
         },
         results = {
-            {type = "item", name = "se-scrap", probability = 0.98, amount = 20},
-            {type = "item", name = "sc-compressed-scrap", probability = 0.01, amount = 1},
+            {type = "item", name = "se-scrap", amount = 20},
         }
     }
 })
@@ -204,9 +203,8 @@ data:extend({
             {type = "item", name = "se-contaminated-scrap", amount = 10},
             {type = "fluid", name = "se-contaminated-space-water", amount = 998},
             {type = "fluid", name = "se-contaminated-bio-sludge", amount = 2},
-            {type = "item", name = "sand", amount_min = 1, amount_max = 8},
-            {type = "item", name = "uranium-238", probability = 0.05, amount = 1},
-            {type = "item", name = "uranium-235", probability = 0.001, amount = 1},
+            {type = "item", name = "uranium-ore", probability = 0.75, amount = 1},
+            
         }
     },
     {
@@ -229,18 +227,12 @@ data:extend({
         subgroup = "scrap",
         ingredients = {
             {type = "item", name = "sc-radiation-scrap", amount = 10},
-            {type = "fluid", name = "se-chemical-gel", amount = 250},
-            {type = "fluid", name = "sulfuric-acid", amount = 25},
-            {type = "item", name = "sand", amount = 25},
+            {type = "fluid", name = "se-vitalic-acid", amount = 10},
         },
         results = {
             {type = "item", name = "se-contaminated-scrap", amount = 10},
-            {type = "fluid", name = "se-contaminated-space-water", amount = 125},
-            {type = "fluid", name = "se-contaminated-bio-sludge", amount = 25},
-            {type = "item", name = "sand", amount_min = 5, amount_max = 10},
-            {type = "item", name = "uranium-238", probability = 0.05, amount = 1},
-            {type = "item", name = "uranium-235", probability = 0.001, amount = 1},
-            {type = "item", name = "uranium-ore", probability = 0.25, amount = 1},
+            {type = "fluid", name = "se-contaminated-bio-sludge", amount = 10},
+            {type = "item", name = "uranium-ore", amount = 1},
         }
     },
     
@@ -249,7 +241,8 @@ data:extend({
 data_util.tech_lock_recipes("se-recycling-facility", "scrap-to-raw-scrap")
 data_util.tech_lock_recipes("se-space-decontamination-facility", "scrap-decontamination-ground")
 data_util.tech_lock_recipes("se-space-mechanical-laboratory", {"sc-scrap-compression", "sc-scrap-decompression"})
-data_util.tech_lock_recipes("se-space-decontamination-facility", {"sc-radiation-scrap-cleaning-slow", "sc-radiation-scrap-cleaning-fast"})
+data_util.tech_lock_recipes("se-space-decontamination-facility", "sc-radiation-scrap-cleaning-slow")
+data_util.tech_lock_recipes("se-vitalic-acid", "sc-radiation-scrap-cleaning-fast")
 
 local function raw_scrap_smelting(ore_name, count, probability, outcount)
     local scrap_name = "raw-scrap-" .. ore_name

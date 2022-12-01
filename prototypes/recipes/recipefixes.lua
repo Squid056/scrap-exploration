@@ -23,7 +23,7 @@ Redefine_results_table("se-broken-data-scrapping", {
 -- mess around with normal se scrap recycling 
 Redefine_results_table("se-scrap-recycling", {
     {type = "item", name = "sc-raw-scrap", amount = 10},
-    {type = "fluid", name = "heavy-oil", probability = 0.15, amount = 1}
+    {type = "fluid", name = "heavy-oil", probability = 0.25, amount = 1}
 })
 data.raw.recipe["se-scrap-recycling"].subgroup = "scrap"
 data.raw.recipe["se-scrap-recycling"].icons = data_util.transition_icons(
@@ -39,19 +39,11 @@ data.raw.recipe["se-scrap-recycling"].icons = data_util.transition_icons(
 
 Redefine_results_table("se-scrap-decontamination", {
     {type = "item", name = "se-scrap", amount = 20},
-    {type = "item", name = "sc-raw-scrap",probability = 0.50, amount_min = 1, amount_max = 10},
     {type = "fluid", name = "se-contaminated-bio-sludge", amount = 1},
     {type = "fluid", name = "se-contaminated-space-water", amount = 1},
-    {type = "item", name = "uranium-ore",probability = 0.01, amount_min = 1, amount_max = 3},
+    {type = "item", name = "uranium-ore", probability = 0.001, amount = 1},
 })
 data.raw.recipe["se-scrap-decontamination"].subgroup = "scrap"
-
--- lrf shenanigains
-local lrf = data.raw.recipe["se-liquid-rocket-fuel"]
-lrf.icon = "__space-exploration-graphics__/graphics/icons/fluid/liquid-rocket-fuel.png"
-lrf.icon_size = data.raw.fluid["se-liquid-rocket-fuel"].icon_size
-lrf.main_product = "se-liquid-rocket-fuel"
-data_util.replace_or_add_result("se-liquid-rocket-fuel", nil , "sc-raw-scrap", 2)
 
 if not mods["Krastorio2"] then
     Redefine_results_table("se-rocket-fuel-from-water-copper", {
@@ -121,8 +113,8 @@ Redefine_results_table("se-impact-shielding-data", {
     {type = "item", name = "se-impact-shielding-data", amount = 25},
     {type = "item", name = "se-heavy-girder", probability = 0.5, amount = 1},
     {type = "item", name = "se-iridium-plate", probability = 0.25, amount = 1},
-    {type = "item", name = "sc-compressed-scrap", amount = 70},
-    {type = "item", name = "sc-raw-scrap", amount = 500},
+    {type = "item", name = "sc-compressed-scrap", amount = 50},
+    {type = "item", name = "se-scrap", amount = 500},
     {type = "fluid", name = "se-contaminated-space-water", amount = 1},
 })
 
@@ -178,17 +170,16 @@ Add_result("se-quantum-phenomenon-data",
 )
 
 Redefine_ingredients_table("se-quantum-phenomenon-data", {
-    {type = "item", name = "se-empty-data", amount = 3},
+    {type = "item", name = "se-empty-data", amount = 5},
     {type = "fluid", name = "se-space-coolant-cold", amount = 25},
     {type = "item", name = "construction-robot", amount = 1},
 })
 Redefine_results_table("se-quantum-phenomenon-data", {
-    {type = "item", name = "se-quantum-phenomenon-data", probability = 0.85, amount = 3},
-    {type = "item", name = "se-junk-data", probability = 0.10, amount = 1},
+    {type = "item", name = "se-quantum-phenomenon-data", amount = 5},
     {type = "fluid", name = "se-space-coolant-hot", amount = 25},
     {type = "item", name = "construction-robot", probability = 0.84, amount = 1},
     {type = "item", name = "logistic-robot", probability = 0.15, amount = 1},
-    {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount_min = 1, amount_max = 5}
+    {type = "item", name = "sc-radiation-scrap", amount = 2}
 })
 data.raw.recipe["se-quantum-phenomenon-data"].energy_required = 20
 data.raw.recipe["se-quantum-phenomenon-data"].icons = data_util.sub_icons(data.raw.item["se-quantum-phenomenon-data"].icon, data.raw.item["construction-robot"].icon)
@@ -232,6 +223,8 @@ Add_result("se-space-mirror-alternate",
 --#endregion
 
 --#region bio changes (minor)
+
+data_util.tech_lock_recipes("se-space-catalogue-biological-4", "sc-experimental-fish-growth")
 
 Add_result("se-radiation-exposure-data",
     {type = "item", name = "sc-radiation-scrap", probability = 0.1, amount = 1}
@@ -291,48 +284,54 @@ Add_result("se-naquium-energy-data",
 
 --#endregion
 
---#region Matter fusion changes (mostly just scrap swaps)
+--#region Matter fusion changes (mostly just scrap swaps), optional 
 
-data_util.replace_or_add_result("se-matter-fusion-iron", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+if settings.startup["matter-fusion-swaps"].value == true then
 
-data_util.replace_or_add_result("se-matter-fusion-copper", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-iron", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-stone", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-copper", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-uranium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-stone", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-vulcanite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-uranium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-cryonite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-vulcanite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-beryllium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-cryonite", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-beryllium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
-data_util.replace_or_add_result("se-matter-fusion-iridium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+    data_util.replace_or_add_result("se-matter-fusion-holmium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
 
+    data_util.replace_or_add_result("se-matter-fusion-iridium", "se-contaminated-scrap", "sc-radiation-scrap", 1)
+
+end
 --#endregion
 
 --#region astro observation data changes 
-data_util.tech_lock_recipes("se-space-telescope", "sc-observation-frame-broken")
 
-local function replace_observation_data(type)
-    local data = "se-observation-frame-" .. type
-    data_util.replace_or_add_result(data, data, data, nil, false, 1, 1, 0.98)
-    Add_result(data, {type = "item", name = "sc-observation-frame-broken", probability = 0.02, amount = 1})   
+if settings.startup["broken-observation-changes"].value == true then
+
+    data_util.tech_lock_recipes("se-space-telescope", "sc-observation-frame-broken")
+
+    local function replace_observation_data(type)
+        local data = "se-observation-frame-" .. type
+        data_util.replace_or_add_result(data, data, data, nil, false, 1, 1, 0.98)
+        Add_result(data, {type = "item", name = "sc-observation-frame-broken", probability = 0.02, amount = 1})   
+    end
+    -- basic observation 
+    replace_observation_data("radio")
+    replace_observation_data("microwave")
+    replace_observation_data("infrared")
+    replace_observation_data("visible")
+    replace_observation_data("uv")
+
+    -- xray and gamma observation
+    data_util.replace_or_add_result("se-observation-frame-xray", "se-observation-frame-xray", "se-observation-frame-xray", nil, false, 12, 12, 0.92)
+    Add_result("se-observation-frame-xray", {type = "item", name = "sc-observation-frame-broken", probability = 0.08, amount = 12})
+
+    data_util.replace_or_add_result("se-observation-frame-gammaray", "se-observation-frame-gammaray", "se-observation-frame-gammaray", nil, false, 12, 12, 0.92)
+    Add_result("se-observation-frame-gammaray", {type = "item", name = "sc-observation-frame-broken", probability = 0.08, amount = 12})
 end
--- basic observation 
-replace_observation_data("radio")
-replace_observation_data("microwave")
-replace_observation_data("infrared")
-replace_observation_data("visible")
-replace_observation_data("uv")
-
--- xray and gamma observation
-data_util.replace_or_add_result("se-observation-frame-xray", "se-observation-frame-xray", "se-observation-frame-xray", nil, false, 12, 12, 0.92)
-Add_result("se-observation-frame-xray", {type = "item", name = "sc-observation-frame-broken", probability = 0.08, amount = 12})
-
-data_util.replace_or_add_result("se-observation-frame-gammaray", "se-observation-frame-gammaray", "se-observation-frame-gammaray", nil, false, 12, 12, 0.92)
-Add_result("se-observation-frame-gammaray", {type = "item", name = "sc-observation-frame-broken", probability = 0.08, amount = 12})
-
 --#endregion
